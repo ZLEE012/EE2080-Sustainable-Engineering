@@ -1,0 +1,51 @@
+:root {
+    background-color:forestgreen;
+    font-size: 62.5%;
+}
+body {
+    font-family: Arial, sans-serif;
+    margin: 20;
+    padding: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.title {
+    text-align: center;
+}
+h1  {
+    font-size: 5.4rem;
+    color:rgb(255, 255, 255);
+    margin-bottom: 5rem;
+}
+h2  {
+    font-size: 5.4rem;
+    color:rgb(255, 255, 255);
+    margin-bottom: 5rem;
+}
+p1  {
+    font-size: 1.8rem;
+    color:rgb(255, 255, 255);
+    margin-bottom: 5rem;
+}
+p2  {
+    font-size: 1.8rem;
+    color:rgb(255, 255, 255);
+    margin-bottom: 5rem;
+}
+
+.section {
+    margin-bottom: 20px;
+}
+
+.quiz {
+    display: flex;
+}
+
+.quiz > * {
+    flex: 1;
+}
