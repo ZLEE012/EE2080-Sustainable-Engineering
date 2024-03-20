@@ -35,7 +35,7 @@ const questions = [
             { text: "Car", score: 3 },
             { text: "Motorbike", score: 2 },
             { text: "Public Transport", score: 1 },
-            { text: "Walk", score: 0 }
+            { text: "Walk/Cycle", score: 0 }
         ]
     },
     {
@@ -72,6 +72,7 @@ const questions = [
 // DOM elements
 const questionElement = document.getElementById('question');
 const choiceContainers = document.querySelectorAll('.choice-container');
+const gameElement = document.getElementById('game'); // Added to display score, impact, and suggestions
 
 // Quiz variables
 let currentQuestionIndex = 0;
@@ -82,7 +83,6 @@ function displayQuestion() {
     const question = questions[currentQuestionIndex];
     questionElement.textContent = question.question;
 
-    
     // Loop through each answer choice
     choiceContainers.forEach((container, index) => {
         const answer = question.answers[index];
@@ -122,10 +122,9 @@ function handleAnswer(score, choiceIndex) {
         feedbackElement.textContent = "Oops! That's not very sustainable. Consider making changes to reduce your impact.";
     } else if (score == 1) {
         feedbackElement.textContent = "Good effort! You're on the right track, but there's room for improvement.";
-    } 
-      else {
-        feedbackElement.textContent = 'A step towards the right direction! But there is much more needed.'
-      }
+    } else {
+        feedbackElement.textContent = 'A step towards the right direction! But there is much more needed.';
+    }
 
     // Show the feedback paragraph
     feedbackElement.style.display = 'block'; // Ensure feedback is visible
@@ -148,34 +147,69 @@ function displayScore() {
     // Display total score
     const scoreDisplay = document.createElement('p1');
     scoreDisplay.textContent = `Total Score: ${totalScore}`;
-    document.getElementById('game').appendChild(scoreDisplay);
+    gameElement.appendChild(scoreDisplay);
 
-    // Provide feedback based on score ranges
+    // Add information about user's impact on the world and suggestions for reducing their carbon footprint
+    const imageElement = document.createElement('img');
+    imageElement.src = 'UK.jpg  '
+    imageElement.style.width = '300px';
+    imageElement.style.height = '450px';
+    gameElement.appendChild(imageElement);
+    
+    
+
+    const impactElement = document.createElement('p1');
+
+    let average = '';
+    let impactText = '';
+    let suggestions = '';
+
     if (totalScore <= 5) {
-        feedbackElement.textContent = "Great job! You're a sustainability champion!";
+        average = "Based on your score, you are most likely below the UK average. Nice Job!";
+        impactText = "Great job! You're a sustainability champion!";
+        suggestions = "Since you're already doing so well, you can continue your sustainable habits and inspire others to follow suit.";
+        
     } else if (totalScore <= 10) {
-        feedbackElement.textContent = "Well done! You're making good progress towards sustainability.";
+        average = "Based on your score, you are likely below the UK average.Keep up the good work!";
+        impactText = "Well done! You're making good progress towards sustainability.";
+        suggestions = "To further reduce your carbon footprint, consider reducing meat consumption, minimizing food waste, and using public transportation or carpooling more often.";
     } else if (totalScore <= 15) {
-        feedbackElement.textContent = "Nice Try! There's room for improvement, but you're on the right track.";
+        average = "Based on your score, you are most likely above the UK average. Try and work on lowering it!";
+        impactText = "Nice Try! There's room for improvement, but you're on the right track.";
+        suggestions = "To improve your sustainability efforts, focus on reducing meat consumption, recycling more, conserving energy by turning off lights and electronics when not in use, and using more eco-friendly transportation options.";
     } else {
-        feedbackElement.textContent = "Oh No! Looks like there's some work to do. Consider making changes to reduce your impact.";
+        average = "Based on your score, you are most likely above the UK average. MAKE IMMEDIATE CHANGES!!!";
+        impactText = "Oh No! Looks like there's some work to do. Consider making changes to reduce your impact.";
+        suggestions = "It's important to take action to reduce your carbon footprint. Start by cutting down on meat consumption, reducing food waste, using energy-efficient appliances, recycling more, and choosing sustainable transportation options whenever possible.";
     }
+
+    impactElement.textContent = impactText;
+    gameElement.appendChild(impactElement);
+
+    // Display suggestions for reducing carbon footprint
+
+    const averageElement = document.createElement('p1');
+    averageElement.textContent = average;
+    gameElement.appendChild(averageElement);
+
+
+    const suggestionsElement = document.createElement('p1');
+    suggestionsElement.textContent = suggestions;
+    gameElement.appendChild(suggestionsElement);
 
     // Display "Quiz completed!" message
     questionElement.textContent = "Quiz completed!";
     choiceContainers.forEach(container => {
         container.style.display = 'none'; // Hide answer choices
+
+
     });
 
     // Remove the next button
     nextButton.style.display = 'none';
 
-    // Display the feedback element
-    feedbackElement.style.display = 'block';
+
 }
-
-
-
 
 // Function to handle click on an answer choice
 function handleChoiceClick(event) {

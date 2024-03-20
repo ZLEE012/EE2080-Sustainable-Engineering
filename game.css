@@ -35,6 +35,15 @@ p {
     font-size: 3rem; 
     color: white; 
 }
+/* CSS styles for total score, impact, and suggestions */
+
+p1 {
+    font-size: 2rem; /* Change the font size as desired */
+    color: white; /* Change the color as desired */
+    /* Add any additional styling here */
+}
+
+
 
 #game p1 {
     font-size: 3rem; 
